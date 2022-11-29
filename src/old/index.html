@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/styles/global.css">
+</head>
+<body>
+    <style>
+        #panel {
+            display: block;
+            width: 97vw;
+            height: 70vh;
+            display: inline-flex;
+            overflow-y: scroll;
+            padding: 10px;
+        }
+
+        #month {
+            display: inline-flexbox;
+            min-width: 5rem;
+            min-height: 50px;
+            width: max-content;
+            border: solid 1px var(--text);
+            margin: 5px;
+        }
+
+        #week {
+            display: inline-flexbox;
+            min-width: 5rem;
+            min-height: 50px;
+            width: max-content;
+            border: solid 1px var(--text);
+            margin: 5px;
+        }
+
+        #day {
+            display: inline-flexbox;
+            min-width: 5rem;
+            min-height: 50px;
+            width: max-content;
+            border: solid 1px var(--text);
+            margin: 5px;
+        }
+
+        .bit {
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+            transform: translateY(-0.7rem);
+            background-color: var(--background);
+            width: fit-content;
+        }
+    </style>
+
+    <div id="panel">
+        
+    </div>
+
+    <script>
+        const panel = document.getElementById('panel');
+
+        const months = [
+            "jan",
+            "feb",
+            "mar",
+            "apr",
+            "may",
+            "jun",
+            "jul",
+            "aug",
+            "sep",
+            "oct",
+            "nov",
+            "dec"
+        ]
+
+        const day_in_month = {
+            jan: 31,
+            feb: {
+                leap: 29,
+                normal: 28
+            },
+            mar: 31,
+            apr: 30,
+            may: 31,
+            jun: 30,
+            jul: 31,
+            aug: 31,
+            sep: 30,
+            oct: 31,
+            nov: 30,
+            dec: 31
+        }
+
+        //
+
+        const yearBox = document.createElement('div');
+        yearBox.id = 'year';
+
+        for (let month in months) {
+            const monthBox = document.createElement('div');
+            const bit = document.createElement('div');
+            monthBox.id = 'month';
+            bit.className = 'bit';
+            bit.innerHTML = `${months[month]}`;
+            monthBox.appendChild(bit);
+            for (let day = 1; day <= day_in_month[months[month]]; day++) {
+                const dayBox = document.createElement('div');
+                const bit = document.createElement('div');
+                dayBox.id = 'day';
+                bit.className = 'bit';
+                bit.innerHTML = `${day}`;
+                if (months[month] === 'feb') {
+                    if (new Date().getFullYear() % 4 === 0) {
+                        for (let i = 1; i <= day_in_month[month].leap; i++) {
+                            bit.innerHTML = `${i}`;
+                        }
+                    } else {
+                        for (let i = 1; i <= day_in_month[month].normal; i++) {
+                            bit.innerHTML = `${day}`;
+                        }
+                    }
+                }
+                dayBox.appendChild(bit);
+                monthBox.appendChild(dayBox);
+            }
+            panel.appendChild(monthBox);
+        }
+    </script>
+</body>
+</html>

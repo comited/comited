@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/styles/global.css">
+</head>
+<body>
+    <style>
+        #cc {
+            display: block;
+            width: 50vw;
+            height: 25vh;
+            padding: 10px;
+            overflow-y: scroll;
+            border: var(--border) 1px solid;
+            border-radius: 10px;
+        }
+
+        .cc-day {
+            outline: 1px solid var(--border);
+            shape-rendering: geometricPrecision;
+            overflow-wrap: break-word;
+            outline-offset: -1px;
+            padding: 5px;
+            line-height: 0px;
+            font-size: 0px;
+            margin: 1px;
+            border-radius: 2px;
+        }
+    </style>
+
+    <div>
+        <div id="cc">
+
+        </div>
+    </div>
+
+    <script>
+        const commitChart = document.getElementById("cc");
+
+        const day_of_week = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+        const month_of_year = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+        function getStartOfYearDay(year) {
+            return new Date(year, 0, 1).toString().split(" ")[0];
+        }
+
+        const CCbox = document.createElement("svg");
+
+        CCbox.setAttribute("width", "717");
+        CCbox.setAttribute("height", "112");
+
+        const commitTable = document.createElement("g");
+
+        commitTable.setAttribute("transform", "translate(0, 0)");
+
+        for (let i = 1; i <= 53; i++) {
+            var week = document.createElement("g");
+
+            week.setAttribute("transform", `translate(${i * 12/*px*/}, 0)`);
+
+            for (let j = 1; j <= 7; j++) {
+                var day = document.createElement("rect");
+                day.className = "cc-day";
+                day.setAttribute("width", "10px");
+                day.setAttribute("height", "10px");
+                day.setAttribute("x", i * 12/*px*/);
+                day.setAttribute("y", j * 12/*px*/);
+                day.setAttribute("rx", 2);
+                day.setAttribute("ry", 2);
+                day.setAttribute("fill", "rgb(0, 109, 50)");
+                week.appendChild(day);
+            }
+
+            commitTable.appendChild(week);
+        }
+
+        CCbox.appendChild(commitTable);
+
+        commitChart.appendChild(CCbox);
+
+    </script>
+</body>
+</html>
