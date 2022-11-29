@@ -1,2 +1,2 @@
 # Comited
-A developer, repositry or organisation commit tracker and visualizer
+A simple git commit tracker and visualizer for organisations, repositories or individuals
