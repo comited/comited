@@ -72,6 +72,8 @@
             var week = document.createElement("g");
 
             week.setAttribute("transform", `translate(${i * 14/*px*/}, 0)`);
+            
+            week.className = "week";
 
             for (let j = 1; j <= 7; j++) {
                 var day = document.createElement("rect");
@@ -82,7 +84,6 @@
                 day.setAttribute("y", j * 14/*px*/);
                 day.setAttribute("rx", 2);
                 day.setAttribute("ry", 2);
-                week.className = "week";
                 week.appendChild(day);
             }
             commitTable.appendChild(week);
