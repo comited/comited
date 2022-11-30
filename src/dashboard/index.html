@@ -10,25 +10,35 @@
 <body>
     <style>
         #cc {
-            display: block;
+            display: grid;
+            place-items: center;
             width: 50vw;
-            height: 25vh;
+            height: 35vh;
             padding: 10px;
-            overflow-y: scroll;
             border: var(--border) 1px solid;
             border-radius: 10px;
         }
 
+        .week {
+            display: inline-flex;
+            flex-direction: column;
+        }
+
+        br {
+            line-height: -2px;
+        }
+
         .cc-day {
-            outline: 1px solid var(--border);
+            outline: 1px solid rgba(255, 255, 255, 0.95);
             shape-rendering: geometricPrecision;
             overflow-wrap: break-word;
             outline-offset: -1px;
-            padding: 5px;
-            line-height: 0px;
+            width: 10px !important;
+            height: 10px !important;
             font-size: 0px;
             margin: 1px;
             border-radius: 2px;
+            fill: var(--green-chart-2) !important;
         }
     </style>
 
@@ -61,18 +71,18 @@
         for (let i = 1; i <= 53; i++) {
             var week = document.createElement("g");
 
-            week.setAttribute("transform", `translate(${i * 12/*px*/}, 0)`);
+            week.setAttribute("transform", `translate(${i * 14/*px*/}, 0)`);
 
             for (let j = 1; j <= 7; j++) {
                 var day = document.createElement("rect");
                 day.className = "cc-day";
-                day.setAttribute("width", "10px");
-                day.setAttribute("height", "10px");
-                day.setAttribute("x", i * 12/*px*/);
-                day.setAttribute("y", j * 12/*px*/);
+                day.setAttribute("width", "10");
+                day.setAttribute("height", "10");
+                day.setAttribute("x", i * 14/*px*/);
+                day.setAttribute("y", j * 14/*px*/);
                 day.setAttribute("rx", 2);
                 day.setAttribute("ry", 2);
-                day.setAttribute("fill", "rgb(0, 109, 50)");
+                week.className = "week";
                 week.appendChild(day);
             }
             commitTable.appendChild(week);
